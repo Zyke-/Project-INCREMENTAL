@@ -1,8 +1,6 @@
 // JavaScript Document
 //Costants
 
-var _GAMEINFO = "Version 0.1.0.5 Alpha | (CC) Marco Vincenzi 2016.";
-
 var _SLAVECOST = 50.00;
 var _FACTORYCOST = 100.00;
 var _COSTMULTIPLIER = 1.09;
@@ -33,7 +31,7 @@ function init(){
 
 	hide("#milestone-label");
 	hide("#secretstash-toggle");	// Hides secret stash
-	appendToConsole("Game Launched. " + _GAMEINFO);
+	appendToConsole("Game Launched. " + stringGameInfo);
 }
 init();
 //---------------
@@ -47,7 +45,7 @@ function spendMoney(n) {
 		money -= n;
 		return true;
 	} else {
-		appendToConsole("Not enough money. You need " + getEasyNumber(n) + "$. <span class='white'>FeelsBadMan</span>");
+		appendToConsole(stringEnoughMoney + getEasyNumber(n) + "$. " + hideText("FeelsBadMan"));
 		return false;
 	}
 	return false;
@@ -137,7 +135,7 @@ function toggleConsole() {
 		$("#console").show(0);
 		$("#console-toggle").show(0);
 		$("#console-clear").show(0);
-		$("#secretstash-toggle").show(0);
+		//$("#secretstash-toggle").show(0);				// It shouldn't show it
 
 		$("#console").delay(100).animate({ "bottom": "+=200px" }, "slow" );		
 		$("#console-toggle").delay(100).animate({ "bottom": "+=200px" }, "slow" ).html("Hide Console");
@@ -173,24 +171,45 @@ function refreshCounters(){
 	document.getElementById("milestone-label").innerHTML = "Next milestone at: " + milestones[currentMilestone].moneyNeeded + "$";
 }
 
+function refreshMilestones(n){
+	if (n > 0) {
+		show("#load");
+		show("#save");
+	}
+	if (n > 1) {
+		show("#slave-current");
+		show("#slave-label");
+		show("#slave-get");
+	}
+	if (n > 2) {
+		show("#factory-current");
+		show("#factory-label");
+		show("#factory-get");
+	}
+	if (n > 3) {
+		show("#milestone-label");
+	}
+}
 
 //----------------------------------------------
 
 function saveGame(){
-	if (getPrompt()) {
-		spendMoney(50);
-		var save = {
-	    	money: money,
-			slave: slave,
-			factory: factory,
-			milestones: milestones,
-			items: items,
-			slaveMultiplier: slaveMultiplier,
-			factoryMultiplier: factoryMultiplier,
-			factoryCost: factoryCost,
-			currentMilestone: currentMilestone,
+	if (spendMoney(50)) {
+		if (getPrompt()) {
+			var save = {
+		    	money: money,
+				slave: slave,
+				factory: factory,
+				milestones: milestones,
+				items: items,
+				slaveMultiplier: slaveMultiplier,
+				factoryMultiplier: factoryMultiplier,
+				factoryCost: factoryCost,
+				currentMilestone: currentMilestone,
+			}
+			localStorage.setItem("save",JSON.stringify(save));
+			appendToConsole(stringSavedGame);
 		}
-		localStorage.setItem("save",JSON.stringify(save));
 	}
 }
 
@@ -206,6 +225,8 @@ function loadGame(){
 		if (typeof savedgame.slaveMultiplier !== "undefined") slaveMultiplier = savedgame.slaveMultiplier;
 		if (typeof savedgame.factoryMultiplier !== "undefined") factoryMultiplier = savedgame.factoryMultiplier;
 		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
+
+		refreshMilestones(currentMilestone);
 		refreshCounters();
 	}
 }
@@ -219,15 +240,17 @@ function getPrompt(){
 	return confirm("Are you sure?");
 }
 
-function hide (obj) {
+function hide(obj) {
 	$(obj).hide();
 }
 
-function show (obj) {
+function show(obj) {
 	$(obj).show("fast");
 }
 
-
+function hideText(text){
+	return "<span class='white'>" + text + "</span>";
+}
 
 //------------------------------------------------------
 window.setInterval(function(){
