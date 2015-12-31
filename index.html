@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="tooltips.css" />
+<style type="text/css">
+
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Project</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="header"></div>
+
+<div id="main">
+  <div id="block">
+    <div class="unselectable" id="buy" onclick="buy(1)">Grab Money</div>
+    <div class="unselectable" id="save" onclick="saveGame()">Save (50$)</div>
+    <div class="unselectable" id="load" onclick="loadGame()">Load</div>
+    <div id="requestNewFeature" onclick="requestNewFeature()">Request New Feature</div>
+    <div class="unselectable" id="money-current">0</div>
+
+    <div id="slave-label">Slave (50$)</div>
+    <div id="slave-current">0</div><div id="slave-get" onclick="buySlave(1)">+</div>
+
+    <div id="factory-label"></div>
+    <div id="factory-current">0</div><div id="factory-get" onclick="buyFactory(1)">+</div>
+
+    <div id="milestone-label"></div>
+
+
+  </div>
+  <div id="secretstash-toggle">Secret Stash</div>
+  <div id="console-toggle" onclick="toggleConsole()">Hide Console</div>
+  <div id="console"></div>
+  <div id="console-clear" onclick="clearConsole()">Clear Console</div>
+
+</div>
+<script type="text/javascript" src="milestones.js"></script>
+<script type="text/javascript" src="items.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+@charset "utf-8";
+/* CSS Document */
+.body {
+	font-family:"Open Sans", "Arial";	
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+div {
+ 	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;	
+}
+
+.white {
+	color:white;
+}
+
+#main {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+#block {
+	position: relative;
+	margin: auto;
+	top: 20px;
+	width: 700px;
+	height: 600px;
+	z-index: 1;
+}
+#header {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 700px;
+	height: 25px;
+	z-index: 3;
+}
+
+#buy {	
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 20px;
+	top: 70px;
+	width: 175px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+#money-current {
+	position: absolute;
+	left: 215px;
+	top: 70px;
+	width: 150px;
+	height: 25px;
+	z-index: 2;
+}
+#save {
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	right: 0px;
+	top: 100px;
+	width: 100px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+#load {
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	right: 0px;
+	top: 135px;
+	width: 100px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+#requestNewFeature {
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	right: 110px;
+	top: 100px;
+	width: 200px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+
+				/* ----- Slaves ------ */
+#slave-label { 							
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 20px;
+	top: 105px;
+	width: 150px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+} 
+#slave-current {
+	position: absolute;
+	line-height: 25px;
+	left: 215px;
+	top: 105px;
+	width: 100px;
+	height: 25px;
+	z-index: 1;
+}
+#slave-get {	
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 170px;
+	top: 105px;
+	width: 25px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+ 					/* ----- Factory ------ */
+#factory-label { 
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 20px;
+	top: 140px;
+	width: 150px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+} 
+#factory-current {									
+	position: absolute;
+	line-height: 25px;
+	left: 215px;
+	top: 140px;
+	width: 100px;
+	height: 25px;
+	z-index: 1;
+}
+#factory-get {	
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 170px;
+	top: 140px;
+	width: 25px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+			/* ----- Mliestones ------ */
+#milestone-label { 							
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	right: 0px;
+	top: 70px;
+	width: 250px;
+	height: 25px;
+	z-index: 1;
+	text-align: right;
+}
+
+#console-toggle, #console-clear, #secretstash-toggle {
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #CCC solid;
+	cursor: pointer; 
+	cursor: hand;
+}
+#console-toggle{
+	left: 0px;
+	bottom: 200px;
+	width: 100px;
+	height: 25px;
+}
+#console-clear{
+	right: 0px;
+	bottom: 200px;
+	width: 100px;
+	height: 25px;
+}
+
+
+#buy:hover, #save:hover, #load:hover, #requestNewFeature:hover, 
+#slave-get:hover, #factory-get:hover, 
+#console-toggle:hover, #console-clear:hover, #secretstash-toggle:hover {
+	background-color:#CCC;
+}
+
+
+#console {
+	position: absolute;
+	overflow-y: scroll;
+	font-size: 10pt;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 200px;
+	z-index: 1;
+	text-align: left;
+	border-top: 1px #CCC solid;
+
+}
+
+#secretstash-toggle{
+	left: 101px;
+	bottom: 200px;
+	width: 100px;
+	height: 25px;
+}
