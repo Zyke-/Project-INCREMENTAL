@@ -32,7 +32,7 @@ function init(){
 	hide("#factory-get");
 
 	hide("#milestone-label");
-	//hide("#secretstash-toggle");
+	hide("#secretstash-toggle");	// Hides secret stash
 	appendToConsole("Game Launched. " + _GAMEINFO);
 }
 init();
@@ -125,20 +125,24 @@ function toggleConsole() {
 		$("#console").animate({ "bottom": "-=200px" }, "slow" );
 		$("#console-toggle").animate({ "bottom": "-=200px" }, "slow" );
 		$("#console-clear").animate({ "bottom": "-=200px" }, "slow" );
+		$("#secretstash-toggle").animate({ "bottom": "-=200px" }, "slow" );
 
 		$("#console").delay(100).hide(0);
 		$("#console-toggle").delay(100).html("Show Console");		
 		$("#console-clear").delay(100);
+		$("#secretstash-toggle").delay(100);
 
 
 	} else if (!isConsoleOn) {
 		$("#console").show(0);
 		$("#console-toggle").show(0);
 		$("#console-clear").show(0);
+		$("#secretstash-toggle").show(0);
 
 		$("#console").delay(100).animate({ "bottom": "+=200px" }, "slow" );		
 		$("#console-toggle").delay(100).animate({ "bottom": "+=200px" }, "slow" ).html("Hide Console");
 		$("#console-clear").delay(100).animate({ "bottom": "+=200px" }, "slow" );
+		$("#secretstash-toggle").delay(100).animate({ "bottom": "+=200px" }, "slow" );
 	}
 	isConsoleOn = !isConsoleOn;
 }
