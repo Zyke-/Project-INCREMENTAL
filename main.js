@@ -1,36 +1,35 @@
 // JavaScript Document
 //Costants
 
-var _SLAVECOST = 50.00;
-var _FACTORYCOST = 100.00;
+var _SLAVECOST = 20.00;
+var _FACTORYCOST = 50.00;
+var _CORPORATIONCOST = 500.00;
+var _ESPORTSCOST = 10000.00;
+
 var _COSTMULTIPLIER = 1.09;
 
 var isConsoleOn = true;
 var money = 0;
 var slave = 0;
 var factory = 0;
+var corporation = 0;
+var esporsts = 0;
+
 var slaveMultiplier = 0.01;
-var factoryMultiplier = 0.25;
+var factoryMultiplier = 0.20;
+var corporationMultiplier = 1.00;
+var esporstsMultiplier = 5.00;
+
 var currentMilestone = 0;
 
 var factoryCost = _FACTORYCOST;
+var corporationCost = _CORPORATIONCOST;
+var esporstsCost = _ESPORTSCOST;
 
 function init(){
-	//$("#deleteSave").hide();
-	hide("#requestNewFeature");
-	hide("#save");
-	hide("#load");
-
-	hide("#slave-current");
-	hide("#slave-label");
-	hide("#slave-get");
-
-	hide("#factory-current");
-	hide("#factory-label");
-	hide("#factory-get");
-
-	hide("#milestone-label");
-	hide("#secretstash-toggle");	// Hides secret stash
+	for (var i = 0; i < stringDivsToHide.length; i++) {
+		hide("#" + stringDivsToHide[i]);
+	}
 	appendToConsole("Game Launched. " + stringGameInfo);
 }
 init();
@@ -49,6 +48,10 @@ function spendMoney(n) {
 		return false;
 	}
 	return false;
+}
+
+function removeMoney(n) {
+	money -= n;
 }
 
 //---------------
@@ -77,6 +80,33 @@ function addFromFactory() {
 }
 //---------------
 
+function buyCorporation(n) {
+	corporationCost = getCorporationCost(corporation);
+	if (spendMoney(corporationCost)){ 
+		corporation += n;
+
+	}
+	refreshCounters();
+}
+function addFromCorporation() {
+	money += corporation * corporationMultiplier;
+	refreshCounters();
+}
+//---------------
+function buyEsports(n) {
+	corporationCost = getCorporationCost(corporation);
+	if (spendMoney(corporationCost)){ 
+		corporation += n;
+
+	}
+	refreshCounters();
+}
+function addFromEsports() {
+	money += esporsts * esporstsMultiplier;
+	refreshCounters();
+}
+//---------------
+
 function checkMilestone(){
 	if (currentMilestone != milestones.length){
 		var milestoneObj = milestones[currentMilestone];
@@ -86,33 +116,13 @@ function checkMilestone(){
 		}
 	}
 }
-
-function requestNewFeature(){									
+function unlock(){
 	hide('#requestNewFeature');
-	if (currentMilestone == 0) {			// Add the save and load buttons
-		show("#load");
-		show("#save");
-		appendToConsole(milestones[currentMilestone].msg);
-	} else if (currentMilestone == 1) {		// Unlocks the slave and adds a +1/s
-		show("#slave-current");
-		show("#slave-label");
-		show("#slave-get");
-		appendToConsole(milestones[currentMilestone].msg);
-	} else if (currentMilestone == 2) {		// Add Next Milestone label
-		appendToConsole(milestones[currentMilestone].msg);
-		show("#factory-current");
-		show("#factory-label");
-		show("#factory-get");
-	} else if (currentMilestone == 3) {		// Add Next Milestone label
-		appendToConsole(milestones[currentMilestone].msg);
-		show("#milestone-label");
-	} else if (currentMilestone == 4) {		// Add Next Milestone label
-		appendToConsole(milestones[currentMilestone].msg);
-		
-	}
-
-	currentMilestone++;						// Update the milestones index	
+	unlockSelect(currentMilestone);
+	currentMilestone++;						// Update the milestones index
 }
+
+// ------------------------------------------------------------------------------------
 
 function appendToConsole(appendedText) {	// Console-like box for info and milestones
 	document.getElementById("console").innerHTML += appendedText + "<br>";
@@ -150,12 +160,18 @@ function clearConsole() {
 }
 
 
-
-
 // Stock methods
 
 function getFactoryCost (factory) {
 	return _FACTORYCOST * Math.pow(_COSTMULTIPLIER, factory);
+}
+
+function getCorporationCost (corporation) {
+	return _CORPORATIONCOST * Math.pow(_COSTMULTIPLIER, corporation);
+}
+
+function getEsportsCost (esporsts) {
+	return _ESPORTSCOST * Math.pow(_COSTMULTIPLIER, esporsts);
 }
 
 function getEasyNumber(n){
@@ -166,11 +182,16 @@ function refreshCounters(){
 	document.getElementById("money-current").innerHTML = getEasyNumber(money) + "$";
 	document.getElementById("slave-current").innerHTML = slave;
 	document.getElementById("factory-current").innerHTML = factory;
+	document.getElementById("corporation-current").innerHTML = corporation;
+
 	document.getElementById("slave-label").innerHTML = "Slave - " + _SLAVECOST + "$";
 	document.getElementById("factory-label").innerHTML = "Factory - " + getEasyNumber(factoryCost) + "$";
+	document.getElementById("corporation-label").innerHTML = "Corporation - " + getEasyNumber(corporationCost) + "$";
+	document.getElementById("esports-label").innerHTML = "E-Sport Investment - " + getEasyNumber(esporstsCost) + "$";
+
 	document.getElementById("milestone-label").innerHTML = "Next milestone at: " + milestones[currentMilestone].moneyNeeded + "$";
 }
-
+/*
 function refreshMilestones(n){
 	if (n > 0) {
 		show("#load");
@@ -189,7 +210,24 @@ function refreshMilestones(n){
 	if (n > 3) {
 		show("#milestone-label");
 	}
-}
+	if (n > 4) {
+		show("#corporation-current");
+		show("#corporation-label");
+		show("#corporation-get");
+	}
+	if (n > 5) {	
+		slaves = 0;
+		hide("#slave-current");
+		hide("#slave-label");
+		hide("#slave-get");
+		removeMoney(milestones[currentMilestone].lostMoney);
+	}
+	if (n > 6) {	
+		show("#esporsts-current");
+		show("#esporsts-label");
+		show("#esporsts-get");
+	} 
+}*/
 
 //----------------------------------------------
 
@@ -200,14 +238,24 @@ function saveGame(){
 		    	money: money,
 				slave: slave,
 				factory: factory,
+				corporation: corporation,
+				esporsts: esporsts,
+
 				milestones: milestones,
 				items: items,
+
 				slaveMultiplier: slaveMultiplier,
 				factoryMultiplier: factoryMultiplier,
+				corporationMultiplier: corporationMultiplier,
+				esporstsMultiplier: esporstsMultiplier,
+
 				factoryCost: factoryCost,
+				corporationCost: corporationCost,
+				esporstsCost: esporstsCost,
+
 				currentMilestone: currentMilestone,
 			}
-			localStorage.setItem("save",JSON.stringify(save));
+			localStorage.setItem("save", JSON.stringify(save));
 			appendToConsole(stringSavedGame);
 		}
 	}
@@ -219,11 +267,20 @@ function loadGame(){
 		if (typeof savedgame.money !== "undefined") money = savedgame.money;
 		if (typeof savedgame.slave !== "undefined") slave = savedgame.slave;
 		if (typeof savedgame.factory !== "undefined") factory = savedgame.factory;
+		if (typeof savedgame.corporation !== "undefined") corporation = savedgame.corporation;
+		if (typeof savedgame.esporsts !== "undefined") esporsts = savedgame.esporsts;
+		
 		if (typeof savedgame.factoryCost !== "undefined") factoryCost = savedgame.factoryCost;
-		if (typeof savedgame.milestones !== "undefined") milestones = savedgame.milestones;
-		if (typeof savedgame.items !== "undefined") items = savedgame.items;
+		if (typeof savedgame.corporationCost !== "undefined") corporationCost = savedgame.corporationCost;
+		if (typeof savedgame.esporstsCost !== "undefined") esporstsCost = savedgame.esporstsCost;
+		
 		if (typeof savedgame.slaveMultiplier !== "undefined") slaveMultiplier = savedgame.slaveMultiplier;
 		if (typeof savedgame.factoryMultiplier !== "undefined") factoryMultiplier = savedgame.factoryMultiplier;
+		if (typeof savedgame.corporationMultiplier !== "undefined") corporationMultiplier = savedgame.corporationMultiplier;
+		if (typeof savedgame.esporstsMultiplier !== "undefined") esporstsMultiplier = savedgame.esporstsMultiplier;
+		
+		if (typeof savedgame.milestones !== "undefined") milestones = savedgame.milestones;
+		if (typeof savedgame.items !== "undefined") items = savedgame.items;
 		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
 
 		refreshMilestones(currentMilestone);
@@ -256,9 +313,11 @@ function hideText(text){
 window.setInterval(function(){
 	refreshCounters();
 	checkMilestone();
-}, 500);
+}, 1000);
 
 window.setInterval(function(){
 	addFromSlave();
 	addFromFactory();
+	addFromCorporation();
+	addFromEsports();
 }, 100);

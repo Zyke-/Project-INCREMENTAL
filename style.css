@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
-.body {
-	font-family:"Open Sans", "Arial";	
+body {
+	font-family: "Open Sans", "Helvetica", "Arial";	
 }
 .unselectable {
     -webkit-touch-callout: none;
@@ -55,7 +55,7 @@ div {
 	line-height: 25px;
 	left: 20px;
 	top: 70px;
-	width: 175px;
+	width: 225px;
 	height: 25px;
 	z-index: 1;
 	text-align: center;
@@ -65,7 +65,7 @@ div {
 }
 #money-current {
 	position: absolute;
-	left: 215px;
+	left: 265px;
 	top: 70px;
 	width: 150px;
 	height: 25px;
@@ -116,78 +116,6 @@ div {
 	cursor: hand;
 }
 
-
-				/* ----- Slaves ------ */
-#slave-label { 							
-	position: absolute;
-	font-size: 11pt;
-	line-height: 25px;
-	left: 20px;
-	top: 105px;
-	width: 150px;
-	height: 25px;
-	z-index: 1;
-	text-align: center;
-} 
-#slave-current {
-	position: absolute;
-	line-height: 25px;
-	left: 215px;
-	top: 105px;
-	width: 100px;
-	height: 25px;
-	z-index: 1;
-}
-#slave-get {	
-	position: absolute;
-	font-size: 11pt;
-	line-height: 25px;
-	left: 170px;
-	top: 105px;
-	width: 25px;
-	height: 25px;
-	z-index: 1;
-	text-align: center;
-	border: 1px #000 solid;
-	cursor: pointer; 
-	cursor: hand;
-}
- 					/* ----- Factory ------ */
-#factory-label { 
-	position: absolute;
-	font-size: 11pt;
-	line-height: 25px;
-	left: 20px;
-	top: 140px;
-	width: 150px;
-	height: 25px;
-	z-index: 1;
-	text-align: center;
-} 
-#factory-current {									
-	position: absolute;
-	line-height: 25px;
-	left: 215px;
-	top: 140px;
-	width: 100px;
-	height: 25px;
-	z-index: 1;
-}
-#factory-get {	
-	position: absolute;
-	font-size: 11pt;
-	line-height: 25px;
-	left: 170px;
-	top: 140px;
-	width: 25px;
-	height: 25px;
-	z-index: 1;
-	text-align: center;
-	border: 1px #000 solid;
-	cursor: pointer; 
-	cursor: hand;
-}
-			/* ----- Mliestones ------ */
 #milestone-label { 							
 	position: absolute;
 	font-size: 11pt;
@@ -199,6 +127,84 @@ div {
 	z-index: 1;
 	text-align: right;
 }
+
+				/* ----- Labels ------ */
+
+#slave-label, #factory-label, #corporation-label, #esports-label { 							
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 20px;
+	width: 200px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+} 
+#slave-label { 							
+	top: 105px;
+} 
+#factory-label { 
+	top: 140px;
+} 
+#corporation-label {
+	top: 175px;
+}
+#esports-label {
+	top: 210px;
+}
+
+
+				/* ----- Current ------ */
+
+#slave-current, #factory-current, #corporation-current, #esports-current {
+	position: absolute;
+	line-height: 25px;
+	left: 265px;
+	width: 150px;
+	height: 25px;
+	z-index: 1;
+}
+#slave-current {
+	top: 105px;
+}
+#factory-current {									
+	top: 140px;
+}
+#corporation-current {									
+	top: 175px;
+}
+#esports-current {									
+	top: 210px;
+}
+					/* ----- Get ------ */
+
+#slave-get, #factory-get, #corporation-get, #esports-get {	
+	position: absolute;
+	font-size: 11pt;
+	line-height: 25px;
+	left: 220px;
+	width: 25px;
+	height: 25px;
+	z-index: 1;
+	text-align: center;
+	border: 1px #000 solid;
+	cursor: pointer; 
+	cursor: hand;
+}				
+#slave-get {	
+	top: 105px;
+}
+#factory-get {	
+	top: 140px;
+}
+#corporation-get {	
+	top: 175px;
+}
+#esports-get {	
+	top: 210px;
+}
+
+			/* ----- Console ------ */
 
 #console-toggle, #console-clear, #secretstash-toggle {
 	position: absolute;
@@ -225,7 +231,7 @@ div {
 
 
 #buy:hover, #save:hover, #load:hover, #requestNewFeature:hover, 
-#slave-get:hover, #factory-get:hover, 
+#slave-get:hover, #factory-get:hover, #corporation-get:hover,
 #console-toggle:hover, #console-clear:hover, #secretstash-toggle:hover {
 	background-color:#CCC;
 }

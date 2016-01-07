@@ -21,7 +21,7 @@
     <div class="unselectable" id="buy" onclick="buy(1)">Grab Money</div>
     <div class="unselectable" id="save" onclick="saveGame()">Save (50$)</div>
     <div class="unselectable" id="load" onclick="loadGame()">Load</div>
-    <div id="requestNewFeature" onclick="requestNewFeature()">Request New Feature</div>
+    <div id="requestNewFeature" onclick="unlock()">Request New Feature</div>
     <div class="unselectable" id="money-current">0</div>
 
     <div id="slave-label">Slave (50$)</div>
@@ -29,6 +29,12 @@
 
     <div id="factory-label"></div>
     <div id="factory-current">0</div><div id="factory-get" onclick="buyFactory(1)">+</div>
+
+    <div id="corporation-label"></div>
+    <div id="corporation-current">0</div><div id="corporation-get" onclick="buyCorporation(1)">+</div>
+
+    <div id="esports-label"></div>
+    <div id="esports-current">0</div><div id="esports-get" onclick="buyEsports(1)">+</div>
 
     <div id="milestone-label"></div>
 
