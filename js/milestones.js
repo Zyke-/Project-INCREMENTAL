@@ -81,9 +81,9 @@ function unlockSelect (n) {
 		removeMoney(milestones[n].moneyLost);
 
 	} else if (n == 6) {
-		show("#esporsts-current");
-		show("#esporsts-label");
-		show("#esporsts-get");
+		show("#esports-current");
+		show("#esports-label");
+		show("#esports-get");
 		
 	}
 }

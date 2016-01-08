@@ -13,26 +13,36 @@ var money = 0;
 var slave = 0;
 var factory = 0;
 var corporation = 0;
-var esporsts = 0;
+var esports = 0;
 
 var slaveMultiplier = 0.01;
 var factoryMultiplier = 0.20;
 var corporationMultiplier = 1.00;
-var esporstsMultiplier = 5.00;
+var esportsMultiplier = 5.00;
 
 var currentMilestone = 0;
 
 var factoryCost = _FACTORYCOST;
 var corporationCost = _CORPORATIONCOST;
-var esporstsCost = _ESPORTSCOST;
+var esportsCost = _ESPORTSCOST;
 
 function init(){
+	$(".tooltip").tooltipster({ 		// Sets tooltip options
+		theme: 'tooltipster-shadow',
+		position: 'left', 	
+		updateAnimation: false 
+	});				
+
 	for (var i = 0; i < stringDivsToHide.length; i++) {
 		hide("#" + stringDivsToHide[i]);
 	}
 	appendToConsole("Game Launched. " + stringGameInfo);
+
+
 }
 init();
+
+
 //---------------
 
 function buy(n){
@@ -78,7 +88,7 @@ function addFromFactory() {
 	money += factory * factoryMultiplier;
 	refreshCounters();
 }
-//---------------
+//--------------------------
 
 function buyCorporation(n) {
 	corporationCost = getCorporationCost(corporation);
@@ -88,24 +98,25 @@ function buyCorporation(n) {
 	}
 	refreshCounters();
 }
+
 function addFromCorporation() {
 	money += corporation * corporationMultiplier;
 	refreshCounters();
 }
-//---------------
-function buyEsports(n) {
-	corporationCost = getCorporationCost(corporation);
-	if (spendMoney(corporationCost)){ 
-		corporation += n;
+//------------------------
 
+function buyEsports(n) {
+	esportsCost = getEsportsCost(esports);
+	if (spendMoney(esportsCost)){ 
+		esports += n;
 	}
 	refreshCounters();
 }
 function addFromEsports() {
-	money += esporsts * esporstsMultiplier;
+	money += esports * esportsMultiplier;
 	refreshCounters();
 }
-//---------------
+//--------------------------
 
 function checkMilestone(){
 	if (currentMilestone != milestones.length){
@@ -170,8 +181,8 @@ function getCorporationCost (corporation) {
 	return _CORPORATIONCOST * Math.pow(_COSTMULTIPLIER, corporation);
 }
 
-function getEsportsCost (esporsts) {
-	return _ESPORTSCOST * Math.pow(_COSTMULTIPLIER, esporsts);
+function getEsportsCost (esports) {
+	return _ESPORTSCOST * Math.pow(_COSTMULTIPLIER, esports);
 }
 
 function getEasyNumber(n){
@@ -180,16 +191,27 @@ function getEasyNumber(n){
 
 function refreshCounters(){
 	document.getElementById("money-current").innerHTML = getEasyNumber(money) + "$";
+
 	document.getElementById("slave-current").innerHTML = slave;
 	document.getElementById("factory-current").innerHTML = factory;
 	document.getElementById("corporation-current").innerHTML = corporation;
+	document.getElementById("esports-current").innerHTML = esports;
 
 	document.getElementById("slave-label").innerHTML = "Slave - " + _SLAVECOST + "$";
 	document.getElementById("factory-label").innerHTML = "Factory - " + getEasyNumber(factoryCost) + "$";
 	document.getElementById("corporation-label").innerHTML = "Corporation - " + getEasyNumber(corporationCost) + "$";
-	document.getElementById("esports-label").innerHTML = "E-Sport Investment - " + getEasyNumber(esporstsCost) + "$";
-
+	document.getElementById("esports-label").innerHTML = "E-Sport Team - " + getEasyNumber(esportsCost) + "$";
+	
+	if (milestones[currentMilestone] != undefined) {
 	document.getElementById("milestone-label").innerHTML = "Next milestone at: " + milestones[currentMilestone].moneyNeeded + "$";
+	}
+
+	// Refreshing Tooltips
+
+	$("#slave-label").tooltipster('content', (slave * slaveMultiplier) + '$/s');
+	$("#factory-label").tooltipster('content', (factory * factoryMultiplier) + '$/s');
+	$("#corporation-label").tooltipster('content', (corporation * corporationMultiplier) + '$/s');
+	$("#esports-label").tooltipster('content', (esports * esportsMultiplier) + '$/s');
 }
 /*
 function refreshMilestones(n){
@@ -223,9 +245,9 @@ function refreshMilestones(n){
 		removeMoney(milestones[currentMilestone].lostMoney);
 	}
 	if (n > 6) {	
-		show("#esporsts-current");
-		show("#esporsts-label");
-		show("#esporsts-get");
+		show("#esports-current");
+		show("#esports-label");
+		show("#esports-get");
 	} 
 }*/
 
@@ -239,7 +261,7 @@ function saveGame(){
 				slave: slave,
 				factory: factory,
 				corporation: corporation,
-				esporsts: esporsts,
+				esports: esports,
 
 				milestones: milestones,
 				items: items,
@@ -247,11 +269,11 @@ function saveGame(){
 				slaveMultiplier: slaveMultiplier,
 				factoryMultiplier: factoryMultiplier,
 				corporationMultiplier: corporationMultiplier,
-				esporstsMultiplier: esporstsMultiplier,
+				esportsMultiplier: esportsMultiplier,
 
 				factoryCost: factoryCost,
 				corporationCost: corporationCost,
-				esporstsCost: esporstsCost,
+				esportsCost: esportsCost,
 
 				currentMilestone: currentMilestone,
 			}
@@ -268,16 +290,16 @@ function loadGame(){
 		if (typeof savedgame.slave !== "undefined") slave = savedgame.slave;
 		if (typeof savedgame.factory !== "undefined") factory = savedgame.factory;
 		if (typeof savedgame.corporation !== "undefined") corporation = savedgame.corporation;
-		if (typeof savedgame.esporsts !== "undefined") esporsts = savedgame.esporsts;
+		if (typeof savedgame.esports !== "undefined") esports = savedgame.esports;
 		
 		if (typeof savedgame.factoryCost !== "undefined") factoryCost = savedgame.factoryCost;
 		if (typeof savedgame.corporationCost !== "undefined") corporationCost = savedgame.corporationCost;
-		if (typeof savedgame.esporstsCost !== "undefined") esporstsCost = savedgame.esporstsCost;
+		if (typeof savedgame.esportsCost !== "undefined") esportsCost = savedgame.esportsCost;
 		
 		if (typeof savedgame.slaveMultiplier !== "undefined") slaveMultiplier = savedgame.slaveMultiplier;
 		if (typeof savedgame.factoryMultiplier !== "undefined") factoryMultiplier = savedgame.factoryMultiplier;
 		if (typeof savedgame.corporationMultiplier !== "undefined") corporationMultiplier = savedgame.corporationMultiplier;
-		if (typeof savedgame.esporstsMultiplier !== "undefined") esporstsMultiplier = savedgame.esporstsMultiplier;
+		if (typeof savedgame.esportsMultiplier !== "undefined") esportsMultiplier = savedgame.esportsMultiplier;
 		
 		if (typeof savedgame.milestones !== "undefined") milestones = savedgame.milestones;
 		if (typeof savedgame.items !== "undefined") items = savedgame.items;

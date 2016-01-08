@@ -231,7 +231,7 @@ div {
 
 
 #buy:hover, #save:hover, #load:hover, #requestNewFeature:hover, 
-#slave-get:hover, #factory-get:hover, #corporation-get:hover,
+#slave-get:hover, #factory-get:hover, #corporation-get:hover, #esports-get:hover,
 #console-toggle:hover, #console-clear:hover, #secretstash-toggle:hover {
 	background-color:#CCC;
 }
