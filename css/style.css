@@ -3,14 +3,7 @@
 body {
 	font-family: "Open Sans", "Helvetica", "Arial";	
 }
-.unselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+
 div {
  	-webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -40,14 +33,82 @@ div {
 	height: 600px;
 	z-index: 1;
 }
+
+/* ------------------------------------ Header ------------------------------------ */
 #header {
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: 700px;
-	height: 25px;
+	width: 100%;
+	height: 40px;
 	z-index: 3;
 }
+
+#nav {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+	height: 40px;
+
+	text-align: center;
+	line-height: 40px;
+}
+
+#gamePage-toggle {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 30%;
+	height: 40px;
+	display: inline-block;
+	border: 1px solid #DDD;
+	border-top: 0px;
+	margin: 5px;
+	margin-top: 0px;
+}
+
+#achievementsPage-toggle {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 30%;
+	height: 40px;
+	display: inline-block;
+	border: 1px solid #DDD;
+	border-top: 0px;
+	margin: 5px;
+	margin-top: 0px;
+}
+#TODOPage-toggle {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 30%;
+	height: 40px;
+	display: inline-block;
+	/*border: 1px solid #DDD;
+	border-top: 0px;*/
+	margin: 5px;
+	margin-top: 0px;
+	color: white;
+}
+
+/* ------------------------------ Achievements Page ------------------------------- */
+
+#achievementsPage {
+	position: relative;
+	margin: auto;
+	margin-top: -560px;
+	top: 0px;
+	width: 700px;
+	height: 600px;
+	z-index: 10;
+	border:5px #DDD solid;
+	background-color: white;
+}
+
+/* ------------------------------------- Game ------------------------------------- */
 
 #buy {	
 	position: absolute;
@@ -59,7 +120,7 @@ div {
 	height: 25px;
 	z-index: 1;
 	text-align: center;
-	border: 1px #000 solid;
+	border: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
 }
@@ -81,7 +142,7 @@ div {
 	height: 25px;
 	z-index: 1;
 	text-align: center;
-	border: 1px #000 solid;
+	border: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
 }
@@ -96,7 +157,7 @@ div {
 	height: 25px;
 	z-index: 1;
 	text-align: center;
-	border: 1px #000 solid;
+	border: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
 }
@@ -111,7 +172,7 @@ div {
 	height: 25px;
 	z-index: 1;
 	text-align: center;
-	border: 1px #000 solid;
+	border: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
 }
@@ -187,7 +248,7 @@ div {
 	height: 25px;
 	z-index: 1;
 	text-align: center;
-	border: 1px #000 solid;
+	border: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
 }				
@@ -210,9 +271,9 @@ div {
 	position: absolute;
 	font-size: 11pt;
 	line-height: 25px;
-	z-index: 1;
+	z-index: 100;
 	text-align: center;
-	border: 1px #CCC solid;
+	border: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
 }
@@ -229,11 +290,13 @@ div {
 	height: 25px;
 }
 
-
+#gamePage-toggle:hover, #achievementsPage-toggle:hover, /*#TODOPage-toggle:hover,*/
 #buy:hover, #save:hover, #load:hover, #requestNewFeature:hover, 
 #slave-get:hover, #factory-get:hover, #corporation-get:hover, #esports-get:hover,
 #console-toggle:hover, #console-clear:hover, #secretstash-toggle:hover {
-	background-color:#CCC;
+	background-color:#DDD;
+	cursor: pointer; 
+	cursor: hand;	
 }
 
 
@@ -245,9 +308,9 @@ div {
 	bottom: 0px;
 	width: 100%;
 	height: 200px;
-	z-index: 1;
+	z-index: 100;
 	text-align: left;
-	border-top: 1px #CCC solid;
+	border-top: 1px #DDD solid;
 
 }
 

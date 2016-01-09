@@ -9,6 +9,8 @@ var _ESPORTSCOST = 10000.00;
 var _COSTMULTIPLIER = 1.09;
 
 var isConsoleOn = true;
+//var isAchievementsPageOn = false;
+
 var money = 0;
 var slave = 0;
 var factory = 0;
@@ -37,11 +39,9 @@ function init(){
 		hide("#" + stringDivsToHide[i]);
 	}
 	appendToConsole("Game Launched. " + stringGameInfo);
-
-
 }
-init();
 
+init();
 
 //---------------
 
@@ -123,7 +123,7 @@ function checkMilestone(){
 		var milestoneObj = milestones[currentMilestone];
 		if (money >= milestoneObj.moneyNeeded && !milestoneObj.isReached) {	
 			milestoneObj.isReached = true;
-			show("#requestNewFeature");		// Show the request button
+			show("#requestNewFeature");	
 		}
 	}
 }
@@ -151,12 +151,11 @@ function toggleConsole() {
 		$("#console-clear").delay(100);
 		$("#secretstash-toggle").delay(100);
 
-
-	} else if (!isConsoleOn) {
+	} else {
 		$("#console").show(0);
 		$("#console-toggle").show(0);
 		$("#console-clear").show(0);
-		//$("#secretstash-toggle").show(0);				// It shouldn't show it
+		//$("#secretstash-toggle").show(0);				// It shouldn't show it now
 
 		$("#console").delay(100).animate({ "bottom": "+=200px" }, "slow" );		
 		$("#console-toggle").delay(100).animate({ "bottom": "+=200px" }, "slow" ).html("Hide Console");
@@ -170,8 +169,25 @@ function clearConsole() {
 	document.getElementById("console").innerHTML = "";
 }
 
+function toggleAchievementsPage(){
+	/*if (isAchievementsPageOn) {
+		// hides the achieves page
+	} else {
+		//Shows the achisves page on top of the game page
+		$("#achievementsPage").slideToggle();
+	}
+	isAchievementsPageOn = !isAchievementsPageOn*/
 
-// Stock methods
+	$("#achievementsPage").slideToggle();		// This method seems to be easier
+												// althout it is a bit limited
+}
+
+function toggleGamePage(){
+	// sets all of the page toggles to TRUE and calls all of their respective 
+	// toggle functions so that they hide
+}
+
+// --------------------------------------- Stock methods --------------------------------------- //
 
 function getFactoryCost (factory) {
 	return _FACTORYCOST * Math.pow(_COSTMULTIPLIER, factory);
@@ -208,48 +224,11 @@ function refreshCounters(){
 
 	// Refreshing Tooltips
 
-	$("#slave-label").tooltipster('content', (slave * slaveMultiplier) + '$/s');
-	$("#factory-label").tooltipster('content', (factory * factoryMultiplier) + '$/s');
-	$("#corporation-label").tooltipster('content', (corporation * corporationMultiplier) + '$/s');
-	$("#esports-label").tooltipster('content', (esports * esportsMultiplier) + '$/s');
+	$("#slave-label").tooltipster('content', getEasyNumber(slave * slaveMultiplier) + '$/s');
+	$("#factory-label").tooltipster('content', getEasyNumber(factory * factoryMultiplier) + '$/s');
+	$("#corporation-label").tooltipster('content', getEasyNumber(corporation * corporationMultiplier) + '$/s');
+	$("#esports-label").tooltipster('content', getEasyNumber(esports * esportsMultiplier) + '$/s');
 }
-/*
-function refreshMilestones(n){
-	if (n > 0) {
-		show("#load");
-		show("#save");
-	}
-	if (n > 1) {
-		show("#slave-current");
-		show("#slave-label");
-		show("#slave-get");
-	}
-	if (n > 2) {
-		show("#factory-current");
-		show("#factory-label");
-		show("#factory-get");
-	}
-	if (n > 3) {
-		show("#milestone-label");
-	}
-	if (n > 4) {
-		show("#corporation-current");
-		show("#corporation-label");
-		show("#corporation-get");
-	}
-	if (n > 5) {	
-		slaves = 0;
-		hide("#slave-current");
-		hide("#slave-label");
-		hide("#slave-get");
-		removeMoney(milestones[currentMilestone].lostMoney);
-	}
-	if (n > 6) {	
-		show("#esports-current");
-		show("#esports-label");
-		show("#esports-get");
-	} 
-}*/
 
 //----------------------------------------------
 
@@ -305,6 +284,8 @@ function loadGame(){
 		if (typeof savedgame.items !== "undefined") items = savedgame.items;
 		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
 
+		checkAchievement();
+		
 		refreshMilestones(currentMilestone);
 		refreshCounters();
 	}
@@ -335,6 +316,7 @@ function hideText(text){
 window.setInterval(function(){
 	refreshCounters();
 	checkMilestone();
+	
 }, 1000);
 
 window.setInterval(function(){

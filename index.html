@@ -22,15 +22,22 @@
 <!--[if lte IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<div id="header"></div>
+<div id="header">
+  <div id="nav">
+    <div id="gamePage-toggle" onclick="toggleGamePage()"> Game </div>
+    <div id="achievementsPage-toggle" onclick="toggleAchievementsPage()"> Achievements </div>
+    <div id="TODOPage-toggle" > _ </div>
+  </div>
+
+</div>
 
 <div id="main">
   <div id="block">
-    <div class="unselectable" id="buy" onclick="buy(1)">Grab Money</div>
-    <div class="unselectable" id="save" onclick="saveGame()">Save (50$)</div>
-    <div class="unselectable" id="load" onclick="loadGame()">Load</div>
+    <div id="buy" onclick="buy(1)">Grab Money</div>
+    <div id="save" onclick="saveGame()">Save (50$)</div>
+    <div id="load" onclick="loadGame()">Load</div>
     <div id="requestNewFeature" onclick="unlock()">Request New Feature</div>
-    <div class="unselectable" id="money-current">0</div>
+    <div id="money-current">0</div>
 
     <div id="slave-label" class="tooltip">Slave (50$)</div>
     <div id="slave-current">0</div><div id="slave-get" onclick="buySlave(1)">+</div>
@@ -47,6 +54,9 @@
     <div id="milestone-label"></div>
 
 
+  </div>
+  <div id="achievementsPage">
+      --------------------------------------- TODO
   </div>
   <div id="secretstash-toggle">Secret Stash</div>
   <div id="console-toggle" onclick="toggleConsole()">Hide Console</div>

@@ -75,8 +75,7 @@ function unlockSelect (n) {
 
 	} else if (n == 5) {	
 		slaves = 0;
-		hide("#slave-current");
-		hide("#slave-label");
+		$("#slave-label").innerHTML = "BANNED";
 		hide("#slave-get");
 		removeMoney(milestones[n].moneyLost);
 
