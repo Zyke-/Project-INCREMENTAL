@@ -98,14 +98,71 @@ div {
 
 #achievementsPage {
 	position: relative;
+	overflow-y: scroll;
 	margin: auto;
 	margin-top: -560px;
 	top: 0px;
-	width: 700px;
+	width: 650px;
 	height: 600px;
 	z-index: 10;
 	border:5px #DDD solid;
 	background-color: white;
+}
+
+
+#achievBox {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	margin: 25px;
+	width: 600px;
+	height: 150px;
+	font-size: 11pt;
+	display: table;
+}
+
+#achievSubbox {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 300px;
+	height: 150px;
+	border: 1px #DDD solid;
+}
+
+#achievIcon {
+	position: relative;
+	top: 50px;
+	left: 50px;
+	width: 50px;
+	height: 50px; 
+	border: 1px #DDD solid;
+}
+
+#achievName {
+	position: relative;
+	top: 13px;
+	left: 120px;
+	width: 170px;
+	height: 25px; 
+	line-height: normal;
+	vertical-align: middle;
+	word-wrap: break-word;
+	
+}
+
+#achievMsg {
+	position: relative;
+	display: table-cell;
+	top: -50px;
+	left: 325px;
+	margin-left: 25px;
+	width: 250px;
+	height: 100px;
+	font-size: 11pt;
+	line-height: normal;
+	vertical-align: middle;
+	word-wrap: break-word;
 }
 
 /* ------------------------------------- Game ------------------------------------- */
@@ -264,7 +321,6 @@ div {
 #esports-get {	
 	top: 210px;
 }
-
 			/* ----- Console ------ */
 
 #console-toggle, #console-clear, #secretstash-toggle {
@@ -298,6 +354,14 @@ div {
 	cursor: pointer; 
 	cursor: hand;	
 }
+#gamePage-toggle:active, #achievementsPage-toggle:active, /*#TODOPage-toggle:active,*/
+#buy:active, #save:active, #load:active, #requestNewFeature:active, 
+#slave-get:active, #factory-get:active, #corporation-get:active, #esports-get:active,
+#console-toggle:active, #console-clear:active, #secretstash-toggle:active {
+	background-color:#CCC;
+	cursor: pointer; 
+	cursor: hand;	
+}
 
 
 #console {
@@ -311,7 +375,7 @@ div {
 	z-index: 100;
 	text-align: left;
 	border-top: 1px #DDD solid;
-
+	background-color: white;
 }
 
 #secretstash-toggle{
@@ -320,3 +384,5 @@ div {
 	width: 100px;
 	height: 25px;
 }
+
+

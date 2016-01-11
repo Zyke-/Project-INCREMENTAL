@@ -9,8 +9,10 @@ var _ESPORTSCOST = 10000.00;
 var _COSTMULTIPLIER = 1.09;
 
 var isConsoleOn = true;
-//var isAchievementsPageOn = false;
+var isAchievementsPageOn = false;
+var timesClickedCheck1 = false;
 
+var timesClicked = 0;
 var money = 0;
 var slave = 0;
 var factory = 0;
@@ -43,10 +45,11 @@ function init(){
 
 init();
 
-//---------------
+// ------------------------------------ Buying methods ------------------------------------- //
 
 function buy(n){
 	money += n;
+	timesClicked++;
 	refreshCounters();
 }
 function spendMoney(n) {
@@ -54,7 +57,8 @@ function spendMoney(n) {
 		money -= n;
 		return true;
 	} else {
-		appendToConsole(stringEnoughMoney + getEasyNumber(n) + "$. " + hideText("FeelsBadMan"));
+		appendToConsole(hideText("FeelsBadMan"));
+		notie.alert(3, stringEnoughMoney + getEasyNumber(n) + '$.', 2);
 		return false;
 	}
 	return false;
@@ -67,9 +71,13 @@ function removeMoney(n) {
 //---------------
 
 function buySlave(n) {
-	if (spendMoney(_SLAVECOST)) slave += n;
-	refreshCounters();
+	if (spendMoney(_SLAVECOST)) {
+		slave += n;
+		checkForAchievement(1);
+	}
+	refreshCounters();	
 }
+
 function addFromSlave() {
 	money += slave*slaveMultiplier;
 	refreshCounters();
@@ -80,7 +88,7 @@ function buyFactory(n) {
 	factoryCost = getFactoryCost(factory);
 	if (spendMoney(factoryCost)){ 
 		factory += n;
-
+		checkForAchievement(2);
 	}
 	refreshCounters();
 }
@@ -94,7 +102,7 @@ function buyCorporation(n) {
 	corporationCost = getCorporationCost(corporation);
 	if (spendMoney(corporationCost)){ 
 		corporation += n;
-
+		checkForAchievement(4);
 	}
 	refreshCounters();
 }
@@ -109,6 +117,7 @@ function buyEsports(n) {
 	esportsCost = getEsportsCost(esports);
 	if (spendMoney(esportsCost)){ 
 		esports += n;
+		checkForAchievement(5);
 	}
 	refreshCounters();
 }
@@ -116,7 +125,7 @@ function addFromEsports() {
 	money += esports * esportsMultiplier;
 	refreshCounters();
 }
-//--------------------------
+// ------------------------------------ Refresh and Check methods ------------------------------------- //
 
 function checkMilestone(){
 	if (currentMilestone != milestones.length){
@@ -133,9 +142,24 @@ function unlock(){
 	currentMilestone++;						// Update the milestones index
 }
 
-// ------------------------------------------------------------------------------------
+function checkForAchievement(n) {
+	for (var i = 0; i < achievements.length; i++) {
+		if(!achievements[i].isReached && achievements[i].id == n){
+			unlockAchievement(i, true);
+		}
+	}	
+}
 
-function appendToConsole(appendedText) {	// Console-like box for info and milestones
+function checkClickCounter() {
+	if (timesClicked >= 1000 && !timesClickedCheck1) {
+		timesClickedCheck1 = true;
+		checkForAchievement(0);
+	}
+}
+
+// --------------------------------------- Console methods --------------------------------------- //	 Console-like box for info and milestones
+
+function appendToConsole(appendedText) {	
 	document.getElementById("console").innerHTML += appendedText + "<br>";
 }
 
@@ -169,22 +193,43 @@ function clearConsole() {
 	document.getElementById("console").innerHTML = "";
 }
 
+
 function toggleAchievementsPage(){
-	/*if (isAchievementsPageOn) {
+	if (isAchievementsPageOn) {
 		// hides the achieves page
+		// Undisplays the achievements
+		$("#achievementsPage").slideToggle();
+		$('#achievementsPage').empty();
 	} else {
-		//Shows the achisves page on top of the game page
+		// Shows the achisves page on top of the game page
+		// Loads the achievements
+		displayAchievementList();
 		$("#achievementsPage").slideToggle();
 	}
-	isAchievementsPageOn = !isAchievementsPageOn*/
+	isAchievementsPageOn = !isAchievementsPageOn	
+}
 
-	$("#achievementsPage").slideToggle();		// This method seems to be easier
-												// althout it is a bit limited
+function displayAchievementList() {
+	for (var i = 0; i < achievements.length; i++) {
+		var a = achievements[i];
+		if (a.isReached){
+			$('<div/>', {
+			    'id':'achievBox',
+			    'html':'<div id="achievSubbox"><div id="achievIcon"><img src="' + pathImg + a.icon + '"></div><div id="achievName">' +  a.name + '</div><div id="achievMsg">' + a.msg + '</div></div>'
+			}).appendTo('#achievementsPage');	
+		} else {
+			$('<div/>', {
+			    'id':'achievBox',
+			    'html':'<div id="achievSubbox"><div id="achievIcon"><img src="' + pathImg + 'bw' + a.icon + '"></div><div id="achievName">' + stringUnknown + '</div><div id="achievMsg">' + stringUnknown + '</div></div>'
+			}).appendTo('#achievementsPage');		
+
+		}
+	}	
 }
 
 function toggleGamePage(){
-	// sets all of the page toggles to TRUE and calls all of their respective 
-	// toggle functions so that they hide
+	// toggles every open page
+	if (isAchievementsPageOn) { toggleAchievementsPage(); }
 }
 
 // --------------------------------------- Stock methods --------------------------------------- //
@@ -206,8 +251,8 @@ function getEasyNumber(n){
 }
 
 function refreshCounters(){
-	document.getElementById("money-current").innerHTML = getEasyNumber(money) + "$";
-
+	document.getElementById("money-current").innerHTML = parseFloat(getEasyNumber(money)) + "$";
+	
 	document.getElementById("slave-current").innerHTML = slave;
 	document.getElementById("factory-current").innerHTML = factory;
 	document.getElementById("corporation-current").innerHTML = corporation;
@@ -233,9 +278,12 @@ function refreshCounters(){
 //----------------------------------------------
 
 function saveGame(){
-	if (spendMoney(50)) {
-		if (getPrompt()) {
+	notie.confirm('Are you sure?', 'Yes', 'No',  function() { 
+		if (spendMoney(50)) {
 			var save = {
+				timesClicked: timesClicked,
+				timesClickedCheck1: timesClickedCheck1,
+
 		    	money: money,
 				slave: slave,
 				factory: factory,
@@ -244,6 +292,7 @@ function saveGame(){
 
 				milestones: milestones,
 				items: items,
+				achievements: achievements,
 
 				slaveMultiplier: slaveMultiplier,
 				factoryMultiplier: factoryMultiplier,
@@ -258,13 +307,18 @@ function saveGame(){
 			}
 			localStorage.setItem("save", JSON.stringify(save));
 			appendToConsole(stringSavedGame);
+		} else {
+
 		}
-	}
+	});
 }
 
 function loadGame(){
-	if (getPrompt()) {
-		var savedgame = JSON.parse(localStorage.getItem("save"));
+	notie.confirm('Are you sure?', 'Yes', 'No',  function() { 
+		var savedgame = JSON.parse(localStorage.getItem("save"));								// TODO make this a for loop
+		if (typeof savedgame.timesClicked !== "undefined") timesClicked = savedgame.timesClicked;
+		if (typeof savedgame.timesClickedCheck1 !== "undefined") timesClickedCheck1 = savedgame.timesClickedCheck1;
+		
 		if (typeof savedgame.money !== "undefined") money = savedgame.money;
 		if (typeof savedgame.slave !== "undefined") slave = savedgame.slave;
 		if (typeof savedgame.factory !== "undefined") factory = savedgame.factory;
@@ -279,25 +333,21 @@ function loadGame(){
 		if (typeof savedgame.factoryMultiplier !== "undefined") factoryMultiplier = savedgame.factoryMultiplier;
 		if (typeof savedgame.corporationMultiplier !== "undefined") corporationMultiplier = savedgame.corporationMultiplier;
 		if (typeof savedgame.esportsMultiplier !== "undefined") esportsMultiplier = savedgame.esportsMultiplier;
-		
+
+		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
 		if (typeof savedgame.milestones !== "undefined") milestones = savedgame.milestones;
 		if (typeof savedgame.items !== "undefined") items = savedgame.items;
-		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
-
-		checkAchievement();
+		if (typeof savedgame.achievements !== "undefined") achievements = savedgame.achievements;
 		
 		refreshMilestones(currentMilestone);
+		if (typeof savedgame.money !== "undefined") money = parseFloat(savedgame.money);
 		refreshCounters();
-	}
+	});
 }
 
 function deleateSaveGame(){
 	localStorage.removeItem("save");
 	refreshCounters();
-}
-
-function getPrompt(){
-	return confirm("Are you sure?");
 }
 
 function hide(obj) {
@@ -316,7 +366,7 @@ function hideText(text){
 window.setInterval(function(){
 	refreshCounters();
 	checkMilestone();
-	
+	checkClickCounter();
 }, 1000);
 
 window.setInterval(function(){

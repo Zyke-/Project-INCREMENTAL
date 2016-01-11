@@ -1,7 +1,10 @@
 
-var stringGameInfo = "Version 0.2.2 Alpha | (CC) Marco Vincenzi 2016.";
+var stringGameInfo = "Version 0.3.0 Alpha | (CC) Marco Vincenzi 2016.";
 var stringSavedGame = "You saved your progress";
 var stringEnoughMoney = "Not enough money. You need ";
+var stringUnlock = "You unlocked the ";
+
+var stringUnknown = "?????";
 
 var stringDivsToHide = [
  "achievementsPage",
@@ -11,3 +14,5 @@ var stringDivsToHide = [
  "corporation-current", "corporation-label", "corporation-get",
  "esports-current", "esports-label", "esports-get"
 ]
+
+var pathImg = "img/";
