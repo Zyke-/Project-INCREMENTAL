@@ -66,6 +66,8 @@ div {
 	border-top: 0px;
 	margin: 5px;
 	margin-top: 0px;
+	background: rgb(77, 130, 214);
+    color: white;
 }
 
 #achievementsPage-toggle {
@@ -79,6 +81,8 @@ div {
 	border-top: 0px;
 	margin: 5px;
 	margin-top: 0px;
+	background: rgb(77, 130, 214);
+    color: white;
 }
 #TODOPage-toggle {
 	position: relative;
@@ -92,6 +96,7 @@ div {
 	margin: 5px;
 	margin-top: 0px;
 	color: white;
+
 }
 
 /* ------------------------------ Achievements Page ------------------------------- */
@@ -116,7 +121,7 @@ div {
 	left: 0px;
 	margin: 25px;
 	width: 600px;
-	height: 150px;
+	height: 100px;
 	font-size: 11pt;
 	display: table;
 }
@@ -126,35 +131,34 @@ div {
 	top: 0px;
 	left: 0px;
 	width: 300px;
-	height: 150px;
+	height: 100px;
 	border: 1px #DDD solid;
 }
 
 #achievIcon {
 	position: relative;
-	top: 50px;
-	left: 50px;
-	width: 50px;
-	height: 50px; 
-	border: 1px #DDD solid;
+	top: 18px;
+	left: 18px;
+	width: 64px;
+	height: 64px; 
 }
 
 #achievName {
 	position: relative;
-	top: 13px;
-	left: 120px;
+	top: -25px;
+	left: 100px;
 	width: 170px;
 	height: 25px; 
+	font-size: 13pt;
 	line-height: normal;
 	vertical-align: middle;
-	word-wrap: break-word;
-	
+	word-wrap: break-word;	
 }
 
 #achievMsg {
 	position: relative;
 	display: table-cell;
-	top: -50px;
+	top: -90px;
 	left: 325px;
 	margin-left: 25px;
 	width: 250px;
@@ -163,8 +167,17 @@ div {
 	line-height: normal;
 	vertical-align: middle;
 	word-wrap: break-word;
+	color: black;
+	font-weight: normal;
 }
 
+.achievCompleted {
+	background-color: rgb(87, 191, 87);
+	color: white;
+	font-weight: bold;
+}
+
+    
 /* ------------------------------------- Game ------------------------------------- */
 
 #buy {	
@@ -346,7 +359,21 @@ div {
 	height: 25px;
 }
 
-#gamePage-toggle:hover, #achievementsPage-toggle:hover, /*#TODOPage-toggle:hover,*/
+#gamePage-toggle:hover, #achievementsPage-toggle:hover /*#TODOPage-toggle:hover,*/ {
+	background: rgb(90, 145, 230);
+    color: white;
+	cursor: pointer; 
+	cursor: hand;	
+}
+
+#gamePage-toggle:active, #achievementsPage-toggle:active /*#TODOPage-toggle:active,*/ {
+	background: rgb(120, 200, 280);
+    color: white;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+
 #buy:hover, #save:hover, #load:hover, #requestNewFeature:hover, 
 #slave-get:hover, #factory-get:hover, #corporation-get:hover, #esports-get:hover,
 #console-toggle:hover, #console-clear:hover, #secretstash-toggle:hover {
@@ -354,7 +381,7 @@ div {
 	cursor: pointer; 
 	cursor: hand;	
 }
-#gamePage-toggle:active, #achievementsPage-toggle:active, /*#TODOPage-toggle:active,*/
+
 #buy:active, #save:active, #load:active, #requestNewFeature:active, 
 #slave-get:active, #factory-get:active, #corporation-get:active, #esports-get:active,
 #console-toggle:active, #console-clear:active, #secretstash-toggle:active {

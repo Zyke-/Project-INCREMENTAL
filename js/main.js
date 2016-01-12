@@ -215,7 +215,7 @@ function displayAchievementList() {
 		if (a.isReached){
 			$('<div/>', {
 			    'id':'achievBox',
-			    'html':'<div id="achievSubbox"><div id="achievIcon"><img src="' + pathImg + a.icon + '"></div><div id="achievName">' +  a.name + '</div><div id="achievMsg">' + a.msg + '</div></div>'
+			    'html':'<div id="achievSubbox" class="achievCompleted"><div id="achievIcon"><img src="' + pathImg + a.icon + '"></div><div id="achievName">' +  a.name + '</div><div id="achievMsg">' + a.msg + '</div></div>'
 			}).appendTo('#achievementsPage');	
 		} else {
 			$('<div/>', {
@@ -247,11 +247,17 @@ function getEsportsCost (esports) {
 }
 
 function getEasyNumber(n){
+
 	return parseFloat(n).toFixed(2);
 }
 
+function numberWithCommas(x) {
+	x = getEasyNumber(x);
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function refreshCounters(){
-	document.getElementById("money-current").innerHTML = parseFloat(getEasyNumber(money)) + "$";
+	document.getElementById("money-current").innerHTML = numberWithCommas(getEasyNumber(money)) + "$";
 	
 	document.getElementById("slave-current").innerHTML = slave;
 	document.getElementById("factory-current").innerHTML = factory;
@@ -259,9 +265,9 @@ function refreshCounters(){
 	document.getElementById("esports-current").innerHTML = esports;
 
 	document.getElementById("slave-label").innerHTML = "Slave - " + _SLAVECOST + "$";
-	document.getElementById("factory-label").innerHTML = "Factory - " + getEasyNumber(factoryCost) + "$";
-	document.getElementById("corporation-label").innerHTML = "Corporation - " + getEasyNumber(corporationCost) + "$";
-	document.getElementById("esports-label").innerHTML = "E-Sport Team - " + getEasyNumber(esportsCost) + "$";
+	document.getElementById("factory-label").innerHTML = "Factory - " + numberWithCommas(factoryCost) + "$";
+	document.getElementById("corporation-label").innerHTML = "Corporation - " + numberWithCommas(corporationCost) + "$";
+	document.getElementById("esports-label").innerHTML = "E-Sport Team - " + numberWithCommas(esportsCost) + "$";
 	
 	if (milestones[currentMilestone] != undefined) {
 	document.getElementById("milestone-label").innerHTML = "Next milestone at: " + milestones[currentMilestone].moneyNeeded + "$";
@@ -269,10 +275,10 @@ function refreshCounters(){
 
 	// Refreshing Tooltips
 
-	$("#slave-label").tooltipster('content', getEasyNumber(slave * slaveMultiplier) + '$/s');
-	$("#factory-label").tooltipster('content', getEasyNumber(factory * factoryMultiplier) + '$/s');
-	$("#corporation-label").tooltipster('content', getEasyNumber(corporation * corporationMultiplier) + '$/s');
-	$("#esports-label").tooltipster('content', getEasyNumber(esports * esportsMultiplier) + '$/s');
+	$("#slave-label").tooltipster('content', numberWithCommas(slave * slaveMultiplier) + '$/s');
+	$("#factory-label").tooltipster('content', numberWithCommas(factory * factoryMultiplier) + '$/s');
+	$("#corporation-label").tooltipster('content', numberWithCommas(corporation * corporationMultiplier) + '$/s');
+	$("#esports-label").tooltipster('content', numberWithCommas(esports * esportsMultiplier) + '$/s');
 }
 
 //----------------------------------------------
