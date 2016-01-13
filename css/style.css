@@ -359,6 +359,132 @@ div {
 	height: 25px;
 }
 
+/* -------------------------------- Hackers Box -------------------------------- */
+
+#hackers-toggle {						/* The toggle not inside the box, but absolute to the page */
+	position: absolute;
+	right: 0px;
+	top: 175px;
+	z-index: 1000;
+	height: 25px;
+
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 25px;
+	font-size: 11pt;
+	text-align: center;
+
+	background: #000;
+	color: #3F0;
+	border: 1px #DDD solid;
+
+	cursor: pointer; 
+	cursor: hand;
+}
+
+#hackers-toggle:hover {
+	color: black;
+	background-color: #3F0;
+}
+#hackers-toggle:active {
+	background: #D0FFC4;
+}
+
+#hackers-box{
+	position: absolute;
+	font-size: 10pt;
+	overflow-y: hidden;
+	right: 0px;
+	top: 175px;
+	width: 300px;
+	height: 200px;
+	z-index: 100;
+	border: 1px #DDD solid;
+	color: #3F0;
+	background-color: black;
+}
+
+#hackers-box:hover{
+	overflow-y: auto;
+}
+
+#hackers-subbox-inactive {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	margin: 20px;
+	width: 260px;
+	height: 45px;
+	border: 1px #AAA solid;
+
+	color: #3F0;
+	background: #000;
+
+	cursor: pointer;
+}
+#hackers-subbox-active {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	margin: 20px;
+	width: 260px;
+	height: 45px;
+	border: 1px #AAA solid;
+
+	color: #3F0;
+	background: #222;
+
+	cursor: pointer;
+}
+
+#hackers-nick {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 25px;
+	margin: 10px;
+	margin-left: 15px;
+	line-height: 25px;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+#hackers-cost {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 25px;
+	margin: 10px;
+	margin-left: 10px;
+	border: 1px #DDD solid;
+	line-height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 10pt;
+}
+#hackers-tick {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 25px;
+	margin: 10px;
+	margin-left: 10px;
+	line-height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 10pt;
+}
+#hackers-cost:hover, #hackers-tick:hover {
+	background: #3F0;
+	color: black;
+}
+#hackers-cost:active, #hackers-tick:active {
+	background: #D0FFC4;
+	color: black;
+}
+
+/* --------------------------- Hover and Active States --------------------------- */
+
 #gamePage-toggle:hover, #achievementsPage-toggle:hover /*#TODOPage-toggle:hover,*/ {
 	background: rgb(90, 145, 230);
     color: white;

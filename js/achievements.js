@@ -67,8 +67,8 @@ function displayAchievement(n){
 // --------------------------------------- Not used --------------------------------------- //
 
 function getReachedAchievements(){
-	// checks every achievement according to isReached
-	// returns an array with the list of the reached achieves for the page to read
+	// Checks every achievement according to isReached
+	// Returns an array with the list of the reached achieves for the page to read
 	var achievementIndexList = [];
 	for (var i = 0; i < achievement.length; i++) {
 		if (achievements[i].isReached) {
@@ -76,4 +76,13 @@ function getReachedAchievements(){
 		}
 	}
 	return achievementIndexList;
+}
+
+function getAchievementWithID(n){
+	// Returns the first milestone object that matches the id in input
+	// Returns undefined if there are no matches
+	for (var i = 0; i < achievements.length; i++) {
+		if (achievements[i].id == n) { return achievements[i]; }
+	}
+	return undefined;
 }

@@ -37,9 +37,9 @@ var milestones = [
 		msg: "Investing in these new E-Sports seems very promising!"		
 	},
 	{
-		moneyNeeded: 500000,	// Adds the ability to sell factories/ecc for OriginalPrice * n
+		moneyNeeded: 500000,	// Adds Hackers
 		isReached: false,
-		msg: "That's just too much money. Time to spend some! ------------------ Not impemented yet"			
+		msg: "A shady looking guy aproaches you. He is a hacker and he is willing to help you make more money. For a price."			
 	},
 	{
 		moneyNeeded: 10000000,	// Secret stash: special items - Type E to show
@@ -83,7 +83,9 @@ function unlockSelect (n) {
 		show("#esports-current");
 		show("#esports-label");
 		show("#esports-get");
-		
+
+	} else if (n == 7) {
+		//show("#hackers-toggle");				TODO testing hackers
 	}
 }
 
