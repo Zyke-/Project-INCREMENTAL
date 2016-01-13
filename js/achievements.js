@@ -42,8 +42,13 @@ var achievements = [
 		isReached: false,
 		id: 5
 	},
-	
-
+	{
+		name: "Technically Legal",
+		msg: "Hire your first hacker",
+		icon: "tl.png",
+		isReached: false,
+		id: 6
+	},
 ]
 
 function unlockAchievement(n, isNew){
@@ -56,6 +61,14 @@ function unlockAchievement(n, isNew){
 	}
 }
 
+function checkForAchievement(n) {
+	for (var i = 0; i < achievements.length; i++) {
+		if(!achievements[i].isReached && achievements[i].id == n){
+			unlockAchievement(i, true);
+		}
+	}	
+}
+
 function displayAchievement(n){
 	// shows a box that describes the achievement
 	// with a "close" button, it goes away
@@ -63,8 +76,40 @@ function displayAchievement(n){
 	notie.alert(1, achievements[n].name + " - " + achievements[n].msg, 2.5);
 }
 
+function toggleAchievementsPage(){
+	if (isAchievementsPageOn) {
+		// hides the achieves page
+		// Undisplays the achievements
+		$("#achievementsPage").slideToggle();
+	} else {
+		// Shows the achisves page on top of the game page
+		// Loads the achievements
+		displayAchievementList();
+		$("#achievementsPage").slideToggle();
+	}
+	isAchievementsPageOn = !isAchievementsPageOn	
+}
 
-// --------------------------------------- Not used --------------------------------------- //
+function displayAchievementList() {
+	$('#achievementsPage').empty();
+	for (var i = 0; i < achievements.length; i++) {
+		var a = achievements[i];
+		if (a.isReached){
+			$('<div/>', {
+			    'id':'achievBox',
+			    'html':'<div id="achievSubbox" class="achievCompleted"><div id="achievIcon"><img src="' + pathImg + a.icon + '"></div><div id="achievName">' +  a.name + '</div><div id="achievMsg">' + a.msg + '</div></div>'
+			}).appendTo('#achievementsPage');	
+		} else {
+			$('<div/>', {
+			    'id':'achievBox',
+			    'html':'<div id="achievSubbox"><div id="achievIcon"><img src="' + pathImg + 'bw' + a.icon + '"></div><div id="achievName">' + stringUnknown + '</div><div id="achievMsg">' + stringUnknown + '</div></div>'
+			}).appendTo('#achievementsPage');		
+
+		}
+	}	
+}
+
+// --------------------------------------- Stock Methods --------------------------------------- //
 
 function getReachedAchievements(){
 	// Checks every achievement according to isReached

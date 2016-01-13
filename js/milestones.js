@@ -51,41 +51,36 @@ var milestones = [
 function unlockSelect (n) {
 	appendToConsole(milestones[n].msg);
 
-	if (n == 0) {			// Add the save and load buttons
+	if (n == 0) {
 		show("#load");
 		show("#save");
 
-	} else if (n == 1) {		// Unlocks the slave and adds a +1/s
-		show("#slave-current");
+	} else if (n == 1) {
+		show("#slave-gc");
 		show("#slave-label");
-		show("#slave-get");
 
 	} else if (n == 2) {		
-		show("#factory-current");
+		show("#factory-gc");
 		show("#factory-label");
-		show("#factory-get");
 
 	} else if (n == 3) {		
 		show("#milestone-label");
 
 	} else if (n == 4) {		
-		show("#corporation-current");
+		show("#corporation-gc");
 		show("#corporation-label");
-		show("#corporation-get");
 
 	} else if (n == 5) {	
-		slaves = 0;
-		$("#slave-label").innerHTML = "BANNED";
-		hide("#slave-get");
+		slave = 0;
+		hide("#slave-gc");
 		removeMoney(milestones[n].moneyLost);
 
 	} else if (n == 6) {
-		show("#esports-current");
+		show("#esports-gc");
 		show("#esports-label");
-		show("#esports-get");
 
 	} else if (n == 7) {
-		//show("#hackers-toggle");				TODO testing hackers
+		show("#hackers-toggle");
 	}
 }
 

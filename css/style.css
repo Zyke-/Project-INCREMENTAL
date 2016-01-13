@@ -202,6 +202,17 @@ div {
 	height: 25px;
 	z-index: 2;
 }
+
+#income {
+	position: absolute;
+	left: 265px;
+	top: 45px;
+	width: 150px;
+	height: 25px;
+	z-index: 2;
+	font-size: 10pt;
+}
+
 #save {
 	position: absolute;
 	font-size: 11pt;
@@ -265,11 +276,13 @@ div {
 	position: absolute;
 	font-size: 11pt;
 	line-height: 25px;
-	left: 20px;
+	left: 120px;
 	width: 200px;
 	height: 25px;
 	z-index: 1;
 	text-align: center;
+	cursor: pointer; 
+	cursor: hand;
 } 
 #slave-label { 							
 	top: 105px;
@@ -284,56 +297,57 @@ div {
 	top: 210px;
 }
 
+/* --------------------------------------- Get & Current --------------------------------------- */
 
-				/* ----- Current ------ */
+#slave-gc, #factory-gc, #corporation-gc, #esports-gc {
+	position: absolute;
+	line-height: 25px;
+	left: 20px;
+	width: 75px;
+	height: 25px;
+	z-index: 1;
+	border: 1px #DDD solid;
+	cursor: pointer; 
+	
+}
+#slave-gc {
+	top: 105px;
+}
+#factory-gc {									
+	top: 140px;
+}
+#corporation-gc {									
+	top: 175px;
+}
+#esports-gc {									
+	top: 210px;
+}
 
 #slave-current, #factory-current, #corporation-current, #esports-current {
 	position: absolute;
 	line-height: 25px;
-	left: 265px;
-	width: 150px;
+	left: 20px;
+	width: 50px;
 	height: 25px;
 	z-index: 1;
+	top:0px;
 }
-#slave-current {
-	top: 105px;
-}
-#factory-current {									
-	top: 140px;
-}
-#corporation-current {									
-	top: 175px;
-}
-#esports-current {									
-	top: 210px;
-}
-					/* ----- Get ------ */
 
 #slave-get, #factory-get, #corporation-get, #esports-get {	
 	position: absolute;
 	font-size: 11pt;
 	line-height: 25px;
-	left: 220px;
+	left: 50px;
 	width: 25px;
 	height: 25px;
 	z-index: 1;
 	text-align: center;
-	border: 1px #DDD solid;
+	border-left: 1px #DDD solid;
 	cursor: pointer; 
 	cursor: hand;
-}				
-#slave-get {	
-	top: 105px;
+	top:0px;
 }
-#factory-get {	
-	top: 140px;
-}
-#corporation-get {	
-	top: 175px;
-}
-#esports-get {	
-	top: 210px;
-}
+
 			/* ----- Console ------ */
 
 #console-toggle, #console-clear, #secretstash-toggle {
@@ -390,6 +404,24 @@ div {
 	background: #D0FFC4;
 }
 
+#hackers-count{
+	position: relative;
+	top: 10px;
+	left: 10px;
+	margin: 0px;
+	width: 200px;
+	height: 30px;
+
+	font-size: 11pt;
+	line-height: 30px;
+	padding-left: 10px;
+
+	color: #3F0;
+
+	cursor: pointer;
+
+}
+
 #hackers-box{
 	position: absolute;
 	font-size: 10pt;
@@ -397,7 +429,7 @@ div {
 	right: 0px;
 	top: 175px;
 	width: 300px;
-	height: 200px;
+	height: 275px;
 	z-index: 100;
 	border: 1px #DDD solid;
 	color: #3F0;
@@ -474,11 +506,11 @@ div {
 	padding-right: 5px;
 	font-size: 10pt;
 }
-#hackers-cost:hover, #hackers-tick:hover {
+#hackers-cost:hover {
 	background: #3F0;
 	color: black;
 }
-#hackers-cost:active, #hackers-tick:active {
+#hackers-cost:active {
 	background: #D0FFC4;
 	color: black;
 }

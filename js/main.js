@@ -36,6 +36,8 @@ function init(){
 	$(".tooltip").tooltipster({ 		// Sets tooltip options
 		theme: 'tooltipster-shadow',
 		position: 'left', 	
+		offsetX: 20,
+		speed: 250,
 		updateAnimation: false 
 	});				
 
@@ -47,13 +49,14 @@ function init(){
 
 init();
 
-// ------------------------------------ Buying methods ------------------------------------- //
+// ----------------------------------------- Buying methods ----------------------------------------- //
 
 function buy(n){
 	money += n;
 	timesClicked++;
 	refreshCounters();
 }
+
 function spendMoney(n) {
 	if (money >= n) {
 		money -= n;
@@ -107,10 +110,16 @@ function buyEsports(n) {
 }
 
 function addFromInvestments(){
-	var totalToAdd = (slave*slaveMultiplier) + (factory * factoryMultiplier) + (corporation * corporationMultiplier) + (corporation * corporationMultiplier);
-	money += totalToAdd + getHackedMoney(totalToAdd);
+
+	money += getIncome(); 
 }
-// ------------------------------------ Refresh and Check methods ------------------------------------- //
+
+function getIncome() {
+	var totalToAdd = (slave * slaveMultiplier) + (factory * factoryMultiplier) + (corporation * corporationMultiplier) + (esports * esportsMultiplier);
+	return totalToAdd + getHackedMoney(totalToAdd);
+}
+
+// ------------------------------------ Refresh and Check methods ----------------------------------- //
 
 function checkMilestone(){
 	if (currentMilestone != milestones.length){
@@ -128,14 +137,6 @@ function unlock(){
 	currentMilestone++;						// Update the milestones index
 }
 
-function checkForAchievement(n) {
-	for (var i = 0; i < achievements.length; i++) {
-		if(!achievements[i].isReached && achievements[i].id == n){
-			unlockAchievement(i, true);
-		}
-	}	
-}
-
 function checkClickCounter() {
 	if (timesClicked >= 1000 && !timesClickedCheck1) {
 		timesClickedCheck1 = true;
@@ -143,7 +144,7 @@ function checkClickCounter() {
 	}
 }
 
-// --------------------------------------- Paging & Boxes methods --------------------------------------- //	
+// --------------------------------------- Paging & Boxes methods ------------------------------------ //	
 
 function appendToConsole(appendedText) {	
 	document.getElementById("console").innerHTML += appendedText + "<br>";
@@ -179,151 +180,12 @@ function clearConsole() {
 	document.getElementById("console").innerHTML = "";
 }
 
-
-function toggleAchievementsPage(){
-	if (isAchievementsPageOn) {
-		// hides the achieves page
-		// Undisplays the achievements
-		$("#achievementsPage").slideToggle();
-	} else {
-		// Shows the achisves page on top of the game page
-		// Loads the achievements
-		displayAchievementList();
-		$("#achievementsPage").slideToggle();
-	}
-	isAchievementsPageOn = !isAchievementsPageOn	
-}
-
-function displayAchievementList() {
-	$('#achievementsPage').empty();
-	for (var i = 0; i < achievements.length; i++) {
-		var a = achievements[i];
-		if (a.isReached){
-			$('<div/>', {
-			    'id':'achievBox',
-			    'html':'<div id="achievSubbox" class="achievCompleted"><div id="achievIcon"><img src="' + pathImg + a.icon + '"></div><div id="achievName">' +  a.name + '</div><div id="achievMsg">' + a.msg + '</div></div>'
-			}).appendTo('#achievementsPage');	
-		} else {
-			$('<div/>', {
-			    'id':'achievBox',
-			    'html':'<div id="achievSubbox"><div id="achievIcon"><img src="' + pathImg + 'bw' + a.icon + '"></div><div id="achievName">' + stringUnknown + '</div><div id="achievMsg">' + stringUnknown + '</div></div>'
-			}).appendTo('#achievementsPage');		
-
-		}
-	}	
-}
-
-function toggleHackersBox() {
-	if (isHackersBoxOn) {
-		// hides the hackers page
-		// Undisplays the hackers
-		$("#hackers-box").slideToggle();
-	} else {
-		// Shows the hackers page on top of the game page
-		// Loads the hackers
-		displayHackersBox();
-		$("#hackers-box").slideToggle();
-	}
-	isHackersBoxOn = !isHackersBoxOn;
-}
-
-function displayHackersBox() {
-	$('#hackers-box').empty();
-	for (var i = 0; i < hackers.length; i++) {
-		if (!hackers[i].isBought) {
-			$('<div/>', {
-				'id':'hackers-subbox-inactive',
-				'html':'<div id="hackers-nick">' + hackers[i].nick + '</div><div id="hackers-cost">' + hackers[i].cost + ' $' + '</div>',
-			}).appendTo('#hackers-box');
-		} else {
-			$('<div/>', {
-				'id':'hackers-subbox-active',
-				'html':'<div id="hackers-nick">' + hackers[i].nick + '</div><div id="hackers-tick"><img src="' + pathImg + 'tick.png"></div>',
-			}).appendTo('#hackers-box');
-		}
-	}
-}
-
 function toggleGamePage(){
 	// toggles every open page
 	if (isAchievementsPageOn) { toggleAchievementsPage(); }
 }
 
-// --------------------------------------- Stock methods --------------------------------------- //
-
-function getFactoryCost (factory) {
-	return _FACTORYCOST * Math.pow(_COSTMULTIPLIER, factory);
-}
-
-function getCorporationCost (corporation) {
-	return _CORPORATIONCOST * Math.pow(_COSTMULTIPLIER, corporation);
-}
-
-function getEsportsCost (esports) {
-	return _ESPORTSCOST * Math.pow(_COSTMULTIPLIER, esports);
-}
-
-function getEasyNumber(n){
-
-	return parseFloat(n).toFixed(2);
-}
-
-function numberWithCommas(x) {
-	x = getEasyNumber(x);
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function refreshCounters(){
-	document.getElementById("money-current").innerHTML = numberWithCommas(getEasyNumber(money)) + "$";
-	
-	document.getElementById("slave-current").innerHTML = slave;
-	document.getElementById("factory-current").innerHTML = factory;
-	document.getElementById("corporation-current").innerHTML = corporation;
-	document.getElementById("esports-current").innerHTML = esports;
-
-	document.getElementById("slave-label").innerHTML = "Slave - " + _SLAVECOST + " $";
-	document.getElementById("factory-label").innerHTML = "Factory - " + numberWithCommas(factoryCost) + " $";
-	document.getElementById("corporation-label").innerHTML = "Corporation - " + numberWithCommas(corporationCost) + " $";
-	document.getElementById("esports-label").innerHTML = "E-Sport Team - " + numberWithCommas(esportsCost) + " $";
-	
-	if (milestones[currentMilestone] != undefined) {
-		document.getElementById("milestone-label").innerHTML = "Next milestone at: <strong>" + milestones[currentMilestone].moneyNeeded + " $</strong>";
-	}
-
-	// Refreshing Tooltips
-
-	$("#slave-label").tooltipster('content', numberWithCommas(slave * slaveMultiplier) * 10 + ' $/s');
-	$("#factory-label").tooltipster('content', numberWithCommas(factory * factoryMultiplier) * 10 + ' $/s');
-	$("#corporation-label").tooltipster('content', numberWithCommas(corporation * corporationMultiplier) * 10 + ' $/s');
-	$("#esports-label").tooltipster('content', numberWithCommas(esports * esportsMultiplier) * 10 + ' $/s');
-}
-
-function refreshFromSave(){
-	if (slave > 0 && !milestones[5].isReached) {
-		show("#slave-current");
-		show("#slave-label");
-		show("#slave-get");
-	}
-	if (factory > 0) {
-		show("#factory-current");
-		show("#factory-label");
-		show("#factory-get");
-	}
-	if (corporation > 0) {
-		show("#corporation-current");
-		show("#corporation-label");
-		show("#corporation-get");
-	}
-	if (esports > 0) {
-		show("#esports-current");
-		show("#esports-label");
-		show("#esports-get");
-	}
-
-	// TODO refresh for the hackers too
-
-}
-//----------------------------------------------
+// ---------------------------------------- Save & Load methods -------------------------------------- //
 
 function saveGame(){
 	notie.confirm('Are you sure?', 'Yes', 'No',  function() { 
@@ -340,6 +202,7 @@ function saveGame(){
 
 				milestones: milestones,
 				items: items,
+				hackers: hackers,
 				achievements: achievements,
 
 				slaveMultiplier: slaveMultiplier,
@@ -385,6 +248,7 @@ function loadGame(){
 		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
 		if (typeof savedgame.milestones !== "undefined") milestones = savedgame.milestones;
 		if (typeof savedgame.items !== "undefined") items = savedgame.items;
+		if (typeof savedgame.hackers !== "undefined") hackers = savedgame.hackers;
 		if (typeof savedgame.achievements !== "undefined") achievements = savedgame.achievements;
 		
 		refreshMilestones(currentMilestone);
@@ -399,6 +263,84 @@ function deleateSaveGame(){
 	refreshCounters();
 }
 
+function refreshCounters(){
+	document.getElementById("money-current").innerHTML = getNumberWithCommas(money) + " $";
+	document.getElementById("income").innerHTML = getNumberWithCommas(getIncome() * 10 )+ " $/s"
+
+	document.getElementById("slave-current").innerHTML = slave;
+	document.getElementById("factory-current").innerHTML = factory;
+	document.getElementById("corporation-current").innerHTML = corporation;
+	document.getElementById("esports-current").innerHTML = esports;
+
+	document.getElementById("slave-label").innerHTML = "Slave - " + _SLAVECOST + " $";
+	document.getElementById("factory-label").innerHTML = "Factory - " + getNumberWithCommas(factoryCost) + " $";
+	document.getElementById("corporation-label").innerHTML = "Corporation - " + getNumberWithCommas(corporationCost) + " $";
+	document.getElementById("esports-label").innerHTML = "E-Sport Team - " + getNumberWithCommas(esportsCost) + " $";
+	
+	if (milestones[currentMilestone] != undefined) {
+		document.getElementById("milestone-label").innerHTML = "Next milestone at: <strong>" + getNumberWithCommas(milestones[currentMilestone].moneyNeeded) + " $</strong>";
+	}
+
+	// Refreshing Tooltips
+
+	$("#slave-current").tooltipster('content', getNumberWithCommas(slave * slaveMultiplier) * 10 + ' $/s');
+	$("#factory-current").tooltipster('content', getNumberWithCommas(factory * factoryMultiplier) * 10 + ' $/s');
+	$("#corporation-current").tooltipster('content', getNumberWithCommas(corporation * corporationMultiplier) * 10 + ' $/s');
+	$("#esports-current").tooltipster('content', getNumberWithCommas(esports * esportsMultiplier) * 10 + ' $/s');
+}
+
+function refreshFromSave(){
+	if (slave > 0 && !milestones[5].isReached) {
+		show("#slave-gc");
+		show("#slave-label");
+	}
+	if (factory > 0) {
+		show("#factory-gc");
+		show("#factory-label");
+	}
+	if (corporation > 0) {
+		show("#corporation-gc");
+		show("#corporation-label");
+	}
+	if (esports > 0) {
+		show("#esports-gc");
+		show("#esports-label");
+	}
+	if (milestones[5].isReached) {
+		slave = 0;
+		hide("#slave-gc");
+	}
+	if (milestones[7].isReached) {			// Index 7 is the hackers milestone
+		show("#hackers-toggle");
+	}
+
+	// TODO refresh for the hackers too
+}
+
+// ------------------------------------------- Stock methods ----------------------------------------- //
+
+function getFactoryCost (factory) {
+	return _FACTORYCOST * Math.pow(_COSTMULTIPLIER, factory);
+}
+
+function getCorporationCost (corporation) {
+	return _CORPORATIONCOST * Math.pow(_COSTMULTIPLIER, corporation);
+}
+
+function getEsportsCost (esports) {
+	return _ESPORTSCOST * Math.pow(_COSTMULTIPLIER, esports);
+}
+
+function getEasyNumber(n){
+
+	return parseFloat(n).toFixed(2);
+}
+
+function getNumberWithCommas(x) {
+	x = getEasyNumber(x);
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function hide(obj) {
 	$(obj).hide();
 }
@@ -411,7 +353,8 @@ function hideText(text){
 	return "<span class='white'>" + text + "</span>";
 }
 
-//------------------------------------------------------
+// ------------------------------------------- Timer methods ----------------------------------------- //
+
 window.setInterval(function(){
 	refreshCounters();
 	checkMilestone();
@@ -428,15 +371,12 @@ window.setInterval(function(){
 // TODO
 /* 
 
-Implement the hackers hire
-
-Add shadows to HTML Objects
-Add hackers to save and load
-Add hackers to refresh
-Make the next milestone number -> easy number
-Make the HTML labales larger
-Make the unreached achievements box Grey
-Add Random e-sports team victory 1/8192 chance
-Add Hired Hacker achievement "Technically Legal"
+Added shadows to HTML Objects
+Made the unreached achievements box Grey
+Added Random e-sports team victory 1/8192 chance + 250,000$
+Added Hired Hacker achievement "Technically Legal"
+Added Hacker Tooltips with their respective info
+Implement MDL
+Made the slaves label not disappear but changed to "Blocked"
 
 */

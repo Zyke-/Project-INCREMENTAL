@@ -39,19 +39,27 @@
     <div id="load" onclick="loadGame()">Load</div>
     <div id="requestNewFeature" onclick="unlock()">Request New Feature</div>
     <div id="money-current">0</div>
+    <div id="income">0 $/s</div>
 
-    <div id="slave-label" class="tooltip">Slave (50$)</div>
-    <div id="slave-current">0</div><div id="slave-get" onclick="buySlave(1)">+</div>
+    <div id="slave-label">Slave (50$)</div>
+    <div id="slave-gc">
+      <div id="slave-current" class="tooltip">0</div><div id="slave-get" onclick="buySlave(1)">+</div>
+    </div>
 
-    <div id="factory-label" class="tooltip"></div>
-    <div id="factory-current">0</div><div id="factory-get" onclick="buyFactory(1)">+</div>
+    <div id="factory-label"></div>
+    <div id="factory-gc">
+      <div id="factory-current" class="tooltip">0</div><div id="factory-get" onclick="buyFactory(1)">+</div>
+    </div>
 
-    <div id="corporation-label" class="tooltip" ></div>
-    <div id="corporation-current">0</div><div id="corporation-get" onclick="buyCorporation(1)">+</div>
+    <div id="corporation-label"></div>
+    <div id="corporation-gc">
+      <div id="corporation-current" class="tooltip">0</div><div id="corporation-get" onclick="buyCorporation(1)">+</div>
+    </div>
 
-    <div id="esports-label" class="tooltip" ></div>
-    <div id="esports-current">0</div><div id="esports-get" onclick="buyEsports(1)">+</div>
-
+    <div id="esports-label"></div>
+    <div id="esports-gc">
+      <div id="esports-current" class="tooltip">0</div><div id="esports-get" onclick="buyEsports(1)">+</div>
+    </div>
     <div id="milestone-label"></div>
 
     <div id="hackers-toggle" onclick="toggleHackersBox()">Hackers</div>
