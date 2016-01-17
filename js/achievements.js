@@ -69,6 +69,17 @@ function checkForAchievement(n) {
 	}	
 }
 
+function confrontAchievement(savedAchievement) {
+	// When loading achievement from a previous save, it only loads wether
+	// they were reached or not, instead of overwriting the whole object.
+	for (var i = 0; i < achievements.length; i++) {
+		if (savedAchievement[i] != undefined) {
+			achievements[i].isReached = savedAchievement[i].isReached;
+		}
+	}
+}
+
+
 function displayAchievement(n){
 	// shows a box that describes the achievement
 	// with a "close" button, it goes away

@@ -146,7 +146,7 @@ function checkClickCounter() {
 	}
 }
 
-function checkEsportsWin() {
+function checkRandomEvent() {
 	if (esports > 0) {
 		if (esports <= maxEWinChance) { var n = getRandomNumber(esports, 4096); }
 		else if (esports > maxEWinChance) { var n = getRandomNumber(maxEWinChance, 4096); }
@@ -263,7 +263,7 @@ function loadGame(){
 
 		if (typeof savedgame.hackers !== "undefined") confrontHackers(savedgame.hackers); // hackers = savedgame.hackers;
 
-		if (typeof savedgame.achievements !== "undefined") achievements = savedgame.achievements;
+		if (typeof savedgame.achievements !== "undefined") confrontAchievements(savedgame.achievements); // achievements = savedgame.achievements;
 		
 		refreshMilestones(currentMilestone);
 		if (typeof savedgame.money !== "undefined") money = parseFloat(savedgame.money);
@@ -377,7 +377,7 @@ window.setInterval(function(){
 	refreshCounters();
 	checkMilestone();
 	checkClickCounter();
-	checkEsportsWin();
+	checkRandomEvent();
 }, 1000);
 
 window.setInterval(function(){
@@ -392,17 +392,7 @@ window.setInterval(function(){
 
 Implement MaterialDesignL
 Made the slaves label not disappear but change to "Blocked"
-Made the milestone and achievement console messages more visible
 Made the CSS for the Hackers box generate within a loop
+Added Random Corporation \money rush\ of 1/2048 to win 10% of the current capital (every second depending on how many corporations you own)
 
-
-
-0.4.3 Update
-- Added Hacker Tooltips with their respective info
-- Added more hackers
-- Added Hacker Achievement: "Technically Legal"
-- Added Random E-Sports team victory of 1/4096 to win 250,000$
-- When loading hackers from a previous save, it only loads wether they were bought or not, instead of overwriting the whole object.
-- Fixed the Current label position
-- Added shadows to HTML Objects
 */
