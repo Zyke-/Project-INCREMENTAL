@@ -72,7 +72,7 @@ function checkForAchievement(n) {
 function displayAchievement(n){
 	// shows a box that describes the achievement
 	// with a "close" button, it goes away
-	appendToConsole(stringUnlock + "'" + achievements[n].name + "'" + " achievement!");
+	appendToConsole("<strong>" + stringUnlock + "'" + achievements[n].name + "'" + " achievement!</strong>");
 	notie.alert(1, achievements[n].name + " - " + achievements[n].msg, 2.5);
 }
 
@@ -102,7 +102,7 @@ function displayAchievementList() {
 		} else {
 			$('<div/>', {
 			    'id':'achievBox',
-			    'html':'<div id="achievSubbox"><div id="achievIcon"><img src="' + pathImg + 'bw' + a.icon + '"></div><div id="achievName">' + stringUnknown + '</div><div id="achievMsg">' + stringUnknown + '</div></div>'
+			    'html':'<div id="achievSubbox" class="achievIncomplete"><div id="achievIcon"><img src="' + pathImg + 'bw' + a.icon + '"></div><div id="achievName">' + stringUnknown + '</div><div id="achievMsg">' + stringUnknown + '</div></div>'
 			}).appendTo('#achievementsPage');		
 
 		}

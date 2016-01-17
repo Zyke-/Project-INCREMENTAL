@@ -53,6 +53,7 @@ div {
 
 	text-align: center;
 	line-height: 40px;
+
 }
 
 #gamePage-toggle {
@@ -62,12 +63,12 @@ div {
 	width: 30%;
 	height: 40px;
 	display: inline-block;
-	border: 1px solid #DDD;
 	border-top: 0px;
 	margin: 5px;
 	margin-top: 0px;
 	background: rgb(77, 130, 214);
     color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 }
 
 #achievementsPage-toggle {
@@ -77,12 +78,12 @@ div {
 	width: 30%;
 	height: 40px;
 	display: inline-block;
-	border: 1px solid #DDD;
 	border-top: 0px;
 	margin: 5px;
 	margin-top: 0px;
 	background: rgb(77, 130, 214);
     color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 }
 #TODOPage-toggle {
 	position: relative;
@@ -105,12 +106,12 @@ div {
 	position: relative;
 	overflow-y: scroll;
 	margin: auto;
-	margin-top: -560px;
+	margin-top: -550px;
 	top: 0px;
-	width: 650px;
+	width: 657px;
 	height: 600px;
 	z-index: 10;
-	border:5px #DDD solid;
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 	background-color: white;
 }
 
@@ -120,10 +121,13 @@ div {
 	top: 0px;
 	left: 0px;
 	margin: 25px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 	width: 600px;
 	height: 100px;
 	font-size: 11pt;
 	display: table;
+
 }
 
 #achievSubbox {
@@ -132,7 +136,11 @@ div {
 	left: 0px;
 	width: 300px;
 	height: 100px;
-	border: 1px #DDD solid;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  	transition: all 0.2s ease-in-out;
+}
+#achievSubbox:hover {
+	box-shadow: 0 10px 15px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24);
 }
 
 #achievIcon {
@@ -177,6 +185,11 @@ div {
 	font-weight: bold;
 }
 
+.achievIncomplete {
+	background-color: #DDD;
+	color: black;
+	font-weight: bold;
+}
     
 /* ------------------------------------- Game ------------------------------------- */
 
@@ -308,6 +321,7 @@ div {
 	z-index: 1;
 	border: 1px #DDD solid;
 	cursor: pointer; 
+	text-align: center;
 	
 }
 #slave-gc {
@@ -326,7 +340,7 @@ div {
 #slave-current, #factory-current, #corporation-current, #esports-current {
 	position: absolute;
 	line-height: 25px;
-	left: 20px;
+	left: 0px;
 	width: 50px;
 	height: 25px;
 	z-index: 1;
@@ -440,7 +454,7 @@ div {
 	overflow-y: auto;
 }
 
-#hackers-subbox-inactive {
+.HSI0, .HSI1, .HSI2, .HSI3, .HSI4, .HSI5, .HSI6, .HSI7, .HSI8, .HSI9, .HSI10 {
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -454,7 +468,8 @@ div {
 
 	cursor: pointer;
 }
-#hackers-subbox-active {
+
+.HSA0, .HSA1, .HSA2, .HSA3, .HSA4, .HSA5, .HSA6, .HSA7, .HSA8, .HSA9, .HSA10 {
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -515,6 +530,27 @@ div {
 	color: black;
 }
 
+#hackers-infobox {
+	position: absolute;
+	right: 0px;
+	top: -75px;
+	width: 280px;
+	height: 150px;
+	
+	background: #000;
+	border: 1px solid #DDD;
+	color: #EEE;
+	z-index: 100;
+	padding: 10px;
+}
+
+.hacker-data{
+	padding-left: 15px;
+	color: #3F0;
+}
+.hacker-data-description{
+	font-size:8pt;
+}
 /* --------------------------- Hover and Active States --------------------------- */
 
 #gamePage-toggle:hover, #achievementsPage-toggle:hover /*#TODOPage-toggle:hover,*/ {

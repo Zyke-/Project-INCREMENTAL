@@ -11,6 +11,7 @@ var _COSTMULTIPLIER = 1.09;
 var isConsoleOn = true;
 var isAchievementsPageOn = false;
 var isHackersBoxOn = false;
+var isHackersInfoboxOn = false;
 
 var timesClickedCheck1 = false;
 
@@ -36,6 +37,7 @@ function init(){
 	$(".tooltip").tooltipster({ 		// Sets tooltip options
 		theme: 'tooltipster-shadow',
 		position: 'left', 	
+		animation:'grow',
 		offsetX: 20,
 		speed: 250,
 		updateAnimation: false 
@@ -144,6 +146,16 @@ function checkClickCounter() {
 	}
 }
 
+function checkEsportsWin() {
+	if (esports > 0) {
+		if (esports <= maxEWinChance) { var n = getRandomNumber(esports, 4096); }
+		else if (esports > maxEWinChance) { var n = getRandomNumber(maxEWinChance, 4096); }
+		console.log(n);
+		if (n == 1) {
+			displayEvent(1);
+		}
+	}
+}	
 // --------------------------------------- Paging & Boxes methods ------------------------------------ //	
 
 function appendToConsole(appendedText) {	
@@ -248,7 +260,9 @@ function loadGame(){
 		if (typeof savedgame.currentMilestone !== "undefined") currentMilestone = savedgame.currentMilestone;
 		if (typeof savedgame.milestones !== "undefined") milestones = savedgame.milestones;
 		if (typeof savedgame.items !== "undefined") items = savedgame.items;
-		if (typeof savedgame.hackers !== "undefined") hackers = savedgame.hackers;
+
+		if (typeof savedgame.hackers !== "undefined") confrontHackers(savedgame.hackers); // hackers = savedgame.hackers;
+
 		if (typeof savedgame.achievements !== "undefined") achievements = savedgame.achievements;
 		
 		refreshMilestones(currentMilestone);
@@ -331,6 +345,10 @@ function getEsportsCost (esports) {
 	return _ESPORTSCOST * Math.pow(_COSTMULTIPLIER, esports);
 }
 
+function getRandomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function getEasyNumber(n){
 
 	return parseFloat(n).toFixed(2);
@@ -359,6 +377,7 @@ window.setInterval(function(){
 	refreshCounters();
 	checkMilestone();
 	checkClickCounter();
+	checkEsportsWin();
 }, 1000);
 
 window.setInterval(function(){
@@ -371,12 +390,19 @@ window.setInterval(function(){
 // TODO
 /* 
 
-Added shadows to HTML Objects
-Made the unreached achievements box Grey
-Added Random e-sports team victory 1/8192 chance + 250,000$
-Added Hired Hacker achievement "Technically Legal"
-Added Hacker Tooltips with their respective info
-Implement MDL
-Made the slaves label not disappear but changed to "Blocked"
+Implement MaterialDesignL
+Made the slaves label not disappear but change to "Blocked"
+Made the milestone and achievement console messages more visible
+Made the CSS for the Hackers box generate within a loop
 
+
+
+0.4.3 Update
+- Added Hacker Tooltips with their respective info
+- Added more hackers
+- Added Hacker Achievement: "Technically Legal"
+- Added Random E-Sports team victory of 1/4096 to win 250,000$
+- When loading hackers from a previous save, it only loads wether they were bought or not, instead of overwriting the whole object.
+- Fixed the Current label position
+- Added shadows to HTML Objects
 */

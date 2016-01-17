@@ -49,7 +49,7 @@ var milestones = [
 ]
 
 function unlockSelect (n) {
-	appendToConsole(milestones[n].msg);
+	appendToConsole("<strong>" + milestones[n].msg + "</strong>");
 
 	if (n == 0) {
 		show("#load");
