@@ -150,7 +150,6 @@ function checkRandomEvent() {
 	if (esports > 0) {
 		if (esports <= maxEWinChance) { var n = getRandomNumber(esports, 4096); }
 		else if (esports > maxEWinChance) { var n = getRandomNumber(maxEWinChance, 4096); }
-		console.log(n);
 		if (n == 1) {
 			displayEvent(1);
 		}
@@ -394,5 +393,7 @@ Implement MaterialDesignL
 Made the slaves label not disappear but change to "Blocked"
 Made the CSS for the Hackers box generate within a loop
 Added Random Corporation \money rush\ of 1/2048 to win 10% of the current capital (every second depending on how many corporations you own)
-
+Added a team win achievement
+Added a timestamp to the console
+Fix the Slaves Achievement
 */
