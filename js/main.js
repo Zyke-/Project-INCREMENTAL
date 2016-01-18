@@ -396,4 +396,7 @@ Added Random Corporation \money rush\ of 1/2048 to win 10% of the current capita
 Added a team win achievement
 Added a timestamp to the console
 Fix the Slaves Achievement
+Rename the achievement Just One More click -> Hotline Click
+
+
 */
